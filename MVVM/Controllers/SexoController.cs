@@ -55,6 +55,8 @@ namespace MVVM.Controllers
         {
             var eliminars = db.TSexo.FirstOrDefault(x => id == x.ID);
             db.TSexo.Remove(eliminars);
+            db.SaveChanges();
+                
             return Ok(eliminars);
         }
     }

@@ -54,6 +54,7 @@ namespace MVVM.Controllers
         {
            var eliminar = db.TUsuario.FirstOrDefault(x => x.ID == id);
             db.TUsuario.Remove(eliminar);
+            db.SaveChanges();
             return Ok(eliminar);
         }
     }
