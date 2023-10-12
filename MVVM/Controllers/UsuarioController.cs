@@ -20,33 +20,41 @@ namespace MVVM.Controllers
         }
 
         // GET: api/Usuario/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "sapo";
-        }
-
-
-        // GET: api/Usuario/5 
-        [HttpGet]
-        [Route ("api/Usuario/sapo")]
-        public string Get2(int id)
-        {
-            return "value";
+            return Ok(db.TUsuario.ToList().Where(x => x.ID == id).Select(x=> new UsuasrioModel(x)).ToList());
         }
 
         // POST: api/Usuario
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]TUsuario usuario)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            db.TUsuario.Add(usuario); 
+            db.SaveChanges();
+            return Ok(usuario);
         }
 
         // PUT: api/Usuario/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(int id, [FromBody]TUsuario usuario)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            db.TUsuario.Add(usuario);
+            db.SaveChanges();
+            return CreatedAtRoute("swwd",  id = usuario.ID , usuario);
         }
 
         // DELETE: api/Usuario/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+           var eliminar = db.TUsuario.FirstOrDefault(x => x.ID == id);
+            db.TUsuario.Remove(eliminar);
+            return Ok(eliminar);
         }
     }
 }
