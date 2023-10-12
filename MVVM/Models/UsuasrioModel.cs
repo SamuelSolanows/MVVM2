@@ -15,13 +15,14 @@ namespace MVVM.Models
             Apellido = us.Apellido;
             Correo = us.Correo;
             Telefono = us.Telefono;
-            IDSexo = us.IDSexo;
+            
+            Sexo = new SexoModel(us.TSexo);
         }
         public int ID { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
-        public int IDSexo { get; set; }
+        public SexoModel Sexo { get; set; } 
     }
 }
